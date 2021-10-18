@@ -18,9 +18,12 @@ class MainActivity : AppCompatActivity(), EventClickLister {
     lateinit var searchbutton: MaterialButton
     lateinit var seeallbutton: MaterialButton
     lateinit var addevent: MaterialButton
+    lateinit var refreshlist: MaterialButton
     lateinit var rv: RecyclerView
     lateinit var dbh: DatabaseHelper
     lateinit var eventlist:MutableList<EventModel>
+    lateinit var eva:EventViewAdapter
+    lateinit var llm:LinearLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +32,7 @@ class MainActivity : AppCompatActivity(), EventClickLister {
         searchbutton = findViewById(R.id.gotosearch)
         seeallbutton = findViewById(R.id.seeallevents)
         addevent = findViewById(R.id.addevent)
+        refreshlist = findViewById(R.id.refreshlist)
         rv = findViewById(R.id.rv)
 
         dbh = DatabaseHelper(this)
@@ -42,9 +46,8 @@ class MainActivity : AppCompatActivity(), EventClickLister {
             launch(Main) {
 
                 eventlist = eventlistco
-                val eva = EventViewAdapter(this@MainActivity,eventlist,this@MainActivity)
-
-                val llm = LinearLayoutManager(this@MainActivity)
+              eva = EventViewAdapter(this@MainActivity,eventlist,this@MainActivity)
+                llm = LinearLayoutManager(this@MainActivity)
 
                 rv.adapter = eva
                 rv.layoutManager = llm
@@ -89,12 +92,30 @@ class MainActivity : AppCompatActivity(), EventClickLister {
         }
 
 
+        refreshlist.setOnClickListener {
+
+
+            eventlist = dbh.getAllEvents()
+
+            eva = EventViewAdapter(this,eventlist,this)
+            llm = LinearLayoutManager(this)
+
+            rv.adapter = eva
+            rv.layoutManager = llm
+
+            eva.notifyDataSetChanged()
+
+
+        }
+
+
+
     }
 
 
     fun buildlisthere(){
 
-        for(i in 1..20){
+        for(i in 1..2){
 
             dbh.insertevent("demoEvent"+i,"demo event","1.1.0000","Mars",500)
 
@@ -112,5 +133,7 @@ class MainActivity : AppCompatActivity(), EventClickLister {
 
     override fun DeleteClick(Event: EventModel) {
         Toast.makeText(this,"Deleting",Toast.LENGTH_SHORT).show()
+
+        dbh.deleteEvent(Event.id)
     }
 }
