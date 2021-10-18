@@ -129,6 +129,10 @@ class MainActivity : AppCompatActivity(), EventClickLister {
 
 
 
+
+
+
+
     }
 
     override fun DeleteClick(Event: EventModel) {
