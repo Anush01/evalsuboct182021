@@ -1,5 +1,6 @@
 package com.example.anushmp.evalsuboct182021
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -70,6 +71,23 @@ class MainActivity : AppCompatActivity(), EventClickLister {
             rv.visibility = View.VISIBLE
 
         }
+
+
+        val updated: String? = intent.getStringExtra("updated")
+
+        if(updated.equals("yes")){
+
+            rv.adapter?.notifyDataSetChanged()
+
+        }
+
+        addevent.setOnClickListener {
+
+            var i = Intent(this,RegisterEvent::class.java)
+            startActivity(i)
+
+        }
+
 
     }
 

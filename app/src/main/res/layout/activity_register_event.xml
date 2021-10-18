@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterEvent">
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/eventNameEnter"
+        android:hint="Enter event name"
+
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/descEnter"
+        android:layout_below="@+id/eventNameEnter"
+        android:hint="Enter event description"
+
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dateEnter"
+        android:layout_below="@id/descEnter"
+        android:hint="Enter event date"
+
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/locationEnter"
+        android:layout_below="@id/dateEnter"
+        android:hint="Enter event location"
+
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/priceEnter"
+        android:layout_below="@id/locationEnter"
+        android:hint="Enter event price"
+
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register Event"
+        android:layout_below="@+id/priceEnter"
+        android:id="@+id/register"
+
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Go to main activity"
+        android:layout_below="@+id/register"
+        android:id="@+id/mainactlink"
+        />
+
+
+
+</RelativeLayout>
