@@ -53,7 +53,7 @@ class DatabaseHelper(val context:Context): SQLiteOpenHelper(context,"event_db",n
 
         }else{
 
-            Toast.makeText(context,"event added", Toast.LENGTH_SHORT).show()
+           // Toast.makeText(context,"event added", Toast.LENGTH_SHORT).show()
 
         }
 

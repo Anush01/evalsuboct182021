@@ -7,6 +7,10 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.Default
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity(), EventClickLister {
 
@@ -30,14 +34,33 @@ class MainActivity : AppCompatActivity(), EventClickLister {
 
         buildlisthere()
 
-        eventlist = dbh.getAllEvents()
+        CoroutineScope(Default).launch {
 
-        val eva = EventViewAdapter(this,eventlist,this)
+            val eventlistco = dbh.getAllEvents()
 
-        val llm = LinearLayoutManager(this)
+            launch(Main) {
 
-        rv.adapter = eva
-        rv.layoutManager = llm
+                eventlist = eventlistco
+                val eva = EventViewAdapter(this@MainActivity,eventlist,this@MainActivity)
+
+                val llm = LinearLayoutManager(this@MainActivity)
+
+                rv.adapter = eva
+                rv.layoutManager = llm
+
+            }
+
+        }
+
+        //eventlist = dbh.getAllEvents()
+
+
+       // val eva = EventViewAdapter(this,eventlist,this)
+
+        //val llm = LinearLayoutManager(this)
+
+        //rv.adapter = eva
+        //rv.layoutManager = llm
 
 
         rv.visibility = View.GONE
